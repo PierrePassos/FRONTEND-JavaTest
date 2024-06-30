@@ -34,23 +34,24 @@ export class ListProfilesComponent implements OnInit {
   async loadProfiles() {
     this.profiles = new Array<Profile>;
     await this.profileSrv.getAll().subscribe(resp => {
-      const { data, success, error } = resp;
-
-      if (!success) return this.alertSrv.openAlert(error);
-
-      if (data instanceof Array) this.profiles = data
+      if (!!resp && resp instanceof Array) this.profiles = resp;
     });
   }
 
-  deleteProfile(id: number) {
-    console.log(id)
+  async deleteProfile(id: number) {
+    await this.profileSrv.delete(id).subscribe(resp => {
+      this.loadProfiles();
+    })
 
   }
 
   async updateProfile(profile: Profile) {
+
+    await this.profileSrv.getByName(profile.name).subscribe(resp => {
+      console.log(resp);
+   
+    })
     await this.profileSrv.update(profile).subscribe(resp => {
-      const { data, success, error } = resp;
-      if (!success) return this.alertSrv.openAlert(error);
       this.loadProfiles();
       this.alertSrv.openAlert("Atualizado com sucesso");
     })

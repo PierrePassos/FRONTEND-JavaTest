@@ -1,6 +1,6 @@
 import { Profile } from "../../profile/model/profile.model";
 
-export class UserModel {
+export class User {
     id?: number;
     name: string;
     email: string;

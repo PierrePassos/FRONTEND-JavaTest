@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Profile } from '../../model/profile.model';
 import { ProfileService } from '../../service/profile.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../../services/alert.service';
 
 @Component({
@@ -21,15 +20,19 @@ export class ProfileComponent {
   constructor(
     private profileSrv: ProfileService,
     private alertSrv: AlertService
-  ){}
+  ) { }
 
   createProfile(profile: Profile) {
+
     console.log(profile)
+
+   
+
     this.profileSrv.create(profile).subscribe(response => {
       this.alertSrv.openAlert('Salvo com Sucesso');
       this.profile = new Profile();
     });
-    
+
   }
 
   // updateProfile() {

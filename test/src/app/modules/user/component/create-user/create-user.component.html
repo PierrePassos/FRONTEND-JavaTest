@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <h2>Cadastro</h2>
-    <form (ngSubmit)="register()">
+    <form (ngSubmit)="register(user)">
         <div class="form-group">
             <label for="nome">Nome</label>
             <input type="text" class="form-control" id="nome" [(ngModel)]="user.name" name="nome" required>
@@ -10,20 +10,26 @@
             <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
         </div>
         <div class="form-group">
-            <label for="senha">Senha</label>
-            <input [type]="showPassword ? 'text' : 'password'"  type="password" class="form-control" id="senha" [(ngModel)]="user.password" name="senha" required>
-            <button type="button" class="btn btn-outline-secondary" (click)="showPassword = !showPassword">
-              <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-            </button>
+          <label for="senha">Senha</label>
+          <div style="display: flex;">
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="senha" [(ngModel)]="user.password" name="senha" required>
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-secondary" (click)="showPassword = !showPassword">
+                <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </div>
+          </div>
         </div>
-        <!-- <div class="input-group-append">
-          </div> -->
-        <!-- <div class="form-group">
-            <label for="perfil">Perfil</label>
-            <select class="form-control" id="perfil" [(ngModel)]="user.profile" name="perfil" required>
-              <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.nome }}</option>
-            </select>
-          </div> -->
+        @if(profiles.length){
+          <div class="form-group">
+              <label for="perfil">Perfil</label>
+              <select class="form-control" id="perfil" [(ngModel)]="user.profile" name="perfil" required>
+                @for (profile of profiles; track profile) {
+                  <option [ngValue]="profile">{{ profile.name }}</option>
+                }
+              </select>
+            </div>
+        }
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>

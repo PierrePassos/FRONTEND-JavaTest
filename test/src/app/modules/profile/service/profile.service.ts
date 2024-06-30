@@ -15,6 +15,10 @@ export class ProfileService {
         return this.http.get(`${this.apiUrl}/${id}`);
     }
 
+    getByName(name: string) {
+        return this.http.get(`${this.apiUrl}/name/${name}`);
+    }
+
     create(profile: Profile) {
         return this.http.post(`${this.apiUrl}`, profile);
     }
@@ -27,9 +31,8 @@ export class ProfileService {
         return this.http.put(this.apiUrl, profile.id, profile);
     }
 
-    // delete(id: number): Observable<void> {
-    //     const url = `${this.apiUrl}/${id}`;
-    //     return this.http.delete<void>(url);
-    // }
+    delete(id: number) {
+        return this.http.delete(this.apiUrl, id);
+    }
 
 }
