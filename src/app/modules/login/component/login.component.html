@@ -1,0 +1,59 @@
+<!-- tela para login foi feita, mas na geração do token no back estava dando muita divergencia de versões 
+ e fiquei muito tempo preso em erros, não deu tempo de concluir, vou deixar toda a logica aqui ainda -->
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+        <div class="container firt-container">
+            <h2>Login</h2>
+            <form (ngSubmit)="logar(login)">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" [(ngModel)]="login.email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div style="display: flex;">
+                        <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password"
+                            [(ngModel)]="login.password" name="password" required>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary"
+                                (click)="showPassword = !showPassword">
+                                <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Logar</button>
+            </form>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="container">
+            <h2>Cadastrar</h2>
+            <form (ngSubmit)="register(user)">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" [(ngModel)]="user.name" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input [disabled]="!!user.id" type="email" class="form-control" id="email" [(ngModel)]="user.email"
+                        name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div style="display: flex;">
+                        <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password"
+                            [(ngModel)]="user.password" name="password" required>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary"
+                                (click)="showPassword = !showPassword">
+                                <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar-se</button>
+            </form>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

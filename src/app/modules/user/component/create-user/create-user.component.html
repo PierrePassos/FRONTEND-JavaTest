@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>{{ user.id ? 'Editar Cadastro' : 'Cadastro' }}</h2>
+  </div>
+  <form (ngSubmit)="register(user)">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" id="nome" [(ngModel)]="user.name" name="nome" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input [disabled]="!!user.id" type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email"
+        required>
+    </div>
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <div style="display: flex;">
+        <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" [(ngModel)]="user.password"
+          name="password" required>
+        <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary" (click)="showPassword = !showPassword">
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    @if(profiles.length){
+    <div class="form-group">
+      <label for="perfil">Perfil</label>
+      <select class="form-control" id="perfil" [(ngModel)]="user.profile" name="perfil" required>
+        @for (profile of profiles; track profile) {
+        <option [ngValue]="profile">{{ profile.name }}</option>
+        }
+      </select>
+    </div>
+    }
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+  </form>
+</div>

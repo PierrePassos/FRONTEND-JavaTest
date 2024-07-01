@@ -1,0 +1,46 @@
+<div class="container-toolbar">
+    <mat-toolbar class="fixed-toolbar">
+        <button mat-icon-button class="example-icon" aria-label="Menu" (click)="showFiller = !showFiller">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Gerenciamento de Cadastros</span>
+        <span class="spacer"></span>
+        <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Usuário">
+            <mat-icon>person</mat-icon>
+        </button> -->
+    </mat-toolbar>
+
+    @if(showFiller){
+    <div class="row">
+        <div class="col-sm-4 col-md-2 col-lg-2">
+            <mat-list class="sidenav">
+                <mat-list-item
+                    (click)="showOptions == null || showOptions != 'users' ? showOptions = 'users' : showOptions = null">Usuarios</mat-list-item>
+                @if(showOptions == 'users'){
+                <mat-list-item style="padding-left: 30px;" (click)="navigateTo('/cadastrar-usuario')"> Cadastrar
+                    Usuário</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item style="padding-left: 30px;" (click)="navigateTo('/lista-usuarios')">Lista
+                    Usuários</mat-list-item>
+                }
+                <mat-divider></mat-divider>
+                <mat-list-item
+                    (click)="showOptions == null || showOptions != 'profiles' ? showOptions = 'profiles' : showOptions = null">Perfil</mat-list-item>
+                @if(showOptions == 'profiles'){
+                <mat-list-item style="padding-left: 30px;" (click)="navigateTo('/cadastrar-perfil')">Cadastrar
+                    Perfil</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item style="padding-left: 30px;" (click)="navigateTo('/lista-perfis')">Lista
+                    Perfis</mat-list-item>
+                }
+
+                <mat-list-item class="logout">
+                    <mat-icon>person</mat-icon>
+                    <span>Logout</span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    }
+</div>
+<router-outlet></router-outlet>

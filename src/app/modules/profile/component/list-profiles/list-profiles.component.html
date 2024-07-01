@@ -1,0 +1,38 @@
+<!-- profile-table.component.html -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="2"></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @for (profile of profiles; track profile) {
+        <tr>
+            @if(profile){
+            <td colspan="2"></td>
+            <td>{{ profile.id }}</td>
+            <td>
+                <input [(ngModel)]="profile.name" class="form-control" (ngModelChange)="isEditing = profile.id">
+            </td>
+            <td>
+                <button mat-icon-button class="btn btn-success" aria-label="Salvar" (click)="updateProfile(profile)"
+                    [disabled]="isEditing != profile.id">
+                    <mat-icon>save</mat-icon>
+                </button>
+                <!-- Profile só pode ser deletado se não estiver referenciado em nenhum Usuario. -->
+                <!-- <button mat-icon-button class="btn btn-danger" aria-label="Deletar"
+                    (click)="deleteProfile(profile.id)">
+                    <mat-icon>delete</mat-icon>
+                </button> -->
+            </td>
+            }
+        </tr>
+
+        }
+    </tbody>
+</table>
